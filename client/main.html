@@ -1,0 +1,35 @@
+<head>
+  <title>AutoForm-warning</title>
+</head>
+
+<body>
+  <h1>Welcome to Meteor!</h1>
+
+  {{> hello}}
+</body>
+
+<template name="hello">
+  {{#autoForm collection="Studies" id="updateQuestion" type="update" doc=study}} {{#afEachArrayItem name="questions"}}
+  <div class="panel panel-info">
+
+    <div class="panel-heading clearfix">
+      <h4>Question 1</h4>
+      <button class="btn btn-danger btn-md autoform-remove-item align-right" data-autoform-field="items" type="button">Remove question</button>
+    </div>
+
+    <div class="panel panel-body">
+      {{> afQuickField name=(append this.name "title") template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="The actual question" }}
+      {{> afQuickField name=(append this.name "instructions") template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" placeholder="Any instructions for the participant(s)" }} 
+      {{> afQuickField name=(append this.name "type") template="bootstrap3-horizontal" label-class="col-sm-3" input-col-class="col-sm-9" }}
+    </div>
+  </div>
+
+  {{/afEachArrayItem}}
+
+  <div>
+    <button class="btn btn-primary btn-md autoform-add-item outside-form" data-autoform-field="questions" type="button">Add a new question</button>
+    <button class="btn btn-primary btn-md pull-right" type="submit">Next step: schedule configuration</button>
+  </div>
+
+  {{/autoForm}}
+</template>
